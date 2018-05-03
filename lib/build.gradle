@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
+    api 'io.reactivex.rxjava2:rxjava:2.1.13'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    api 'com.squareup.okhttp3:okhttp:3.9.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-rx2:0.22.5'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+buildscript{
+    tasks.withType(Javadoc) {
+        failOnError false
+        options{
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
+}
+
+publish {
+    userOrg = parent.ext.userOrg
+    artifactId = parent.ext.artifactId
+    autoPublish = parent.ext.autoPublish
+    desc = parent.ext.desc
+    groupId = parent.ext.groupId
+    publishVersion = parent.ext.publishVersion
+    uploadName = parent.ext.uploadName
+    website = parent.ext.website
+    repoName = parent.ext.repoName
+}
