@@ -19,7 +19,7 @@ allprojects {
     ext{
         userOrg = "tomlezen"
         repoName = "andbase"
-        groupId = "com.tlz"
+        groupId = "com.tlz.andbase"
         artifactId = "andbase"
         uploadName = "andbase"
         packaging = "aar"
